@@ -1,0 +1,65 @@
+.AllCourses__Wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px;
+  }
+  
+  .AllCourses__Navigator {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .AllCourses__Navigator input {
+    width: 70%;
+    padding: 10px;
+    font-size: 16px;
+  }
+  
+  .AllCourses__Cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+  }
+  
+  .CourseCard {
+    border: 1px solid #333333;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .CourseCard:hover {
+    transform: translateY(10px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+  }
+  
+  /* Add styles for CourseNavigator component */
+  .CourseNavigator {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .CourseNavigator button {
+    background-color: #ff6600;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    margin: 0 5px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .CourseNavigator button:hover {
+    background-color: #ffc801;
+  }
+  
+  .nocourse{
+    width: 1200px;
+    text-align: center;
+    color: #777777;
+    font-size: large;
+  }
+  

@@ -1,0 +1,15 @@
+.success_wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 10%;
+}
+
+.success_wrapper h1{
+    color: #ff6600;
+}
+
+.success_wrapper p{
+    font-size: x-large;
+}
