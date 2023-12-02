@@ -4,13 +4,16 @@ const cors = require("cors");
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 const passport = require("passport");
+const multer = require('multer');
+const path = require('path')
 const authRoute = require("./routes/auth");
 const courseRoutes = require('./routes/courses')
 const allcoursesRoutes = require('./routes/allCourses')
 const Course = require('./models/AllCourses')
 const Stripe = require("stripe")
-const bodyParser = require('body-parser')
-const blogRouter = require('./routes/blogRoutes/blogRoute')
+const blogCategory = require('./routes/blogRoutes/categories');
+const blogPost = require('./routes/blogRoutes/posts')
+const blogUsers = require('./routes/blogRoutes/users')
 const app = express();
 const stripe = Stripe('sk_test_51ODHD6SJRxvTTpNScRrG5yZYIcrMaGQ0VaZwcTBK0ABWLXpP6IRVO3g9H2Y1BcIcYU9BiGnWHF75q7s1Qv3Grr5R00zYUXRIRn')
 
@@ -23,7 +26,7 @@ app.use(
 
 app.use(passport.initialize());
 app.use(passport.session());
-
+// app.use("/images", express.static(path.join(__dirname, "/images")));
 
 const options = {};
 mongoose.connect(process.env.MONGO_URL, options)
@@ -44,14 +47,28 @@ app.use(
   })
 );
 
+//upload utils
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "images");
+  },
+  filename: (req, file, cb) => {
+    cb(null, req.body.name);
+  },
+});
+
+const upload = multer({ storage: storage });
+app.post("/upload", upload.single("file"), (req, res) => {
+  res.status(200).json("File has been uploaded");
+});
 
 
 app.use("/auth", authRoute);
 app.use("/courses", courseRoutes);
 app.use("/courses", allcoursesRoutes);
-app.use(bodyParser.json({ extended: true }));
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use("/blog", blogRouter)
+app.use("/blog/posts", blogPost);
+app.use("/blog/categories", blogCategory);
+// app.use("/blog/profile", blogUsers)
 
 
 app.post("/checkout", async (req, res) => {

@@ -7,12 +7,9 @@ import AllCourses from './pages/AllCourses/AllCourses';
 import CourseDetail from './components/CourseDetail/CourseDetail'
 import Success from './pages/Payment/Success'
 import BlogHome from './pages/Blog/Home/Home'
-import DataProvider from './pages/Blog/Context/DataProvider';
-import Header from './components/BlogComponents/Header/Header';
-import CreatePost from './components/BlogComponents/Create/CreatePost';
-import Update from './components/BlogComponents/Create/Update';
-import DetailView from './components/BlogComponents/Details/DetailView';
-
+import Settings from './pages/Blog/Settings/Settings';
+import Write from './pages/Blog/Write/Write';
+import Single from './pages/Blog/Single/Single';
 
 function App() {
   
@@ -22,11 +19,13 @@ function App() {
       <Router>
         <Routes>
           <Route exact path='/' element={<Home/>}/>
-          <Route exact path="/loginSignup" element={user ? <Home/> : <LoginSignupForm />} />
-          <Route exact path="/allCourses" element={<AllCourses />} />
-          <Route exact path="/success" element={<Success />} />
-          <Route exact path="/blog/home" element={<BlogHome />} />
-          <Route exact path="/blog/create" element={user ? <CreatePost/> : <BlogHome/> } />
+          <Route path="/loginSignup" element={user ? <Home/> : <LoginSignupForm />} />
+          <Route path="/allCourses" element={<AllCourses />} />
+          <Route path="/success" element={<Success />} />
+          <Route path="/blog/home" element={user ? <BlogHome /> : <Home/>} />
+          <Route path="/blog/write" element={user ? <Write/> : <LoginSignupForm/> } />
+          <Route path="/blog/settings" element={user ? <Settings/> : <LoginSignupForm/> } />
+          <Route path="/blog/post/:postId" element={user ? <Single/> : <BlogHome/>}></Route>
           <Route path="/courses/:id" element={<CourseDetail/>} />
         </Routes>
       </Router>

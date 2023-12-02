@@ -19,6 +19,7 @@
     "@stripe/stripe-js": "^2.1.11",
     "axios": "^1.6.0",
     "font-awesome": "^4.7.0",
+    "jwt-decode": "^4.0.0",
     "mongoose": "^8.0.0",
     "react": "^18.2.0",
     "react-airform": "^0.0.2",
@@ -26,6 +27,7 @@
     "react-confetti": "^6.1.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.11.0",
+    "react-router": "^6.20.1",
     "react-router-dom": "^6.18.0",
     "react-stripe-elements": "^6.1.2",
     "stripe": "^14.5.0"

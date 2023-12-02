@@ -1,26 +1,31 @@
+import { useEffect, useState } from "react";
+import Header from "../../../components/BlogComponents/Header/Header";
+import Posts from "../../../components/BlogComponents/Create/Posts";
+import Sidebar from "../../../components/BlogComponents/Sidebar/Sidebar";
+import "./home.css";
+import axios from "axios";
+import { useLocation } from "react-router";
+import TopBar from "../../../components/BlogComponents/Topbar/Topbar";
 
-import { Grid } from '@mui/material';
+export default function Home() {
+  const [posts, setPosts] = useState([]);
+  const { search } = useLocation();
 
-//components
-import Banner from '../../../components/BlogComponents/Banner/Banner';
-import Categories from './Categories';
-import Posts from './post/Posts';
-
-const Home = () => {
-
-    return (
-        <>
-            <Banner />
-            <Grid container>
-                <Grid item lg={2} xs={12} sm={2}>
-                    <Categories />
-                </Grid>
-                <Grid container item xs={12} sm={10} lg={10}>
-                    <Posts />
-                </Grid>
-            </Grid>
-        </>
-    )
+  useEffect(() => {
+    const fetchPosts = async () => {
+      const res = await axios.get("http://localhost:8000/blog/posts" + search);
+      setPosts(res.data);
+    };
+    fetchPosts();
+  }, [search]);
+  return (
+    <>
+    <TopBar/>
+      <Header />
+      <div className="home">
+        <Posts posts={posts} />
+        <Sidebar />
+      </div>
+    </>
+  );
 }
-
-export default Home;

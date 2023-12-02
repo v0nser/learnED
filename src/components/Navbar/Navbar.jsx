@@ -1,13 +1,17 @@
-import React, { useContext } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom'; 
 import './Navbar.css';
 import { Context } from "../../context/Context"
+
 
 const Navbar = () => {
   const { user, dispatch } = useContext(Context);
   const handleLogOut = () => {
     dispatch({ type: "LOGOUT" });
   };
+
+
+  
 
   return (
     <nav className="navbar">
@@ -27,6 +31,9 @@ const Navbar = () => {
           </li>
           <li className="nav-item">
             <a href="/contact">Contact</a>
+          </li>
+          <li className="nav-item">
+            <a href="/blog/home">Blog</a>
           </li>
         </ul>
         <div className="auth-buttons">
