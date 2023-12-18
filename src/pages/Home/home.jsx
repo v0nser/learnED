@@ -6,7 +6,7 @@ import card1 from '../../assets/card_img1.png'
 import card2 from '../../assets/card_img2.png'
 import card3 from '../../assets/card_img3.png'
 import sec4img from '../../assets/sec4img.png'
-import Airform from 'react-airform'
+// import Airform from 'react-airform'
 import Footer from '../../components/Footer/Footer'
 import FeaturedCourses from '../../components/FeaturedCourses/FeaturedCourses'
 import FeaturedBlogs from '../../components/BlogComponents/FeaturedBlog/FeaturedBlog'
@@ -83,7 +83,7 @@ const home = () => {
             <section className="featured-blog">
                 <FeaturedBlogs/>
             </section>
-            <section id="contact" className="contact">
+            {/* <section id="contact" className="contact">
                 <h2>Got Questions?</h2>
                 <br />
 
@@ -103,7 +103,7 @@ const home = () => {
                         </div>
                     </Airform>
                 </div>
-            </section>
+            </section> */}
             <section className="faqs">
                 <Faqs/>
             </section>
