@@ -10,7 +10,7 @@ const FeaturedBlogs = () => {
     const fetchFeaturedBlogs = async () => {
       try {
         // Fetch all blog posts from your API
-        const response = await axios.get("http://localhost:8000/blog/posts");
+        const response = await axios.get("https://learned.onrender.com/blog/posts");
 
         // Filter the posts to get only the featured ones
         const featuredPosts = response.data.filter((post) => post.featured);

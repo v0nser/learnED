@@ -27,7 +27,7 @@ export default function Write() {
       } catch (err) {}
     }
     try {
-      const res = await axios.post("http://localhost:8000/blog/posts", newPost);
+      const res = await axios.post("https://learned.onrender.com/blog/posts", newPost);
       window.location.replace("/blog/post/" + res.data._id);
     } catch (err) {}
   };

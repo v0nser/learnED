@@ -14,7 +14,7 @@ export default function Home() {
 
   useEffect(() => {
     const fetchPosts = async () => {
-      const res = await axios.get("http://localhost:8000/blog/posts" + search);
+      const res = await axios.get("https://learned.onrender.com/blog/posts" + search);
       setPosts(res.data);
     };
     fetchPosts();

@@ -22,7 +22,7 @@ const ConfettiSuccess = ({ location }) => {
     if (id) {
       const fetchCourseDetails = async () => {
         try {
-          const response = await axios.get(`http://localhost:8000/courses/${id}`);
+          const response = await axios.get(`https://learned.onrender.com/courses/${id}`);
           setCourseDetails(response.data);
         } catch (error) {
           console.error('Error fetching course details:', error);

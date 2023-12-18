@@ -22,7 +22,7 @@ const LearningRoom = () => {
     if (id) {
       const fetchVideoUrl = async () => {
         try {
-          const response = await axios.get(`http://localhost:8000/courses/${id}`);
+          const response = await axios.get(`https://learned.onrender.com/courses/${id}`);
           console.log('Video URL:', response.data.VideoURL);
           setVideoUrl(response.data.VideoURL);
           

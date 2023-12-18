@@ -16,7 +16,7 @@ const LoginPopup = ({ onLogin }) => {
     dispatch({ type: "LOGIN_START" });
     try {
       // alert("Login success")
-      const res = await axios.post("http://localhost:8000/auth/login", {
+      const res = await axios.post("https://learned.onrender.com/auth/login", {
         username: userRef.current.value,
         password: passwordRef.current.value,
       });

@@ -14,7 +14,7 @@ const FeaturedCourses = () => {
   useEffect(() => {
     const fetchFeaturedCourses = async () => {
       try {
-        const response = await axios.get('http://localhost:8000/courses/featured-courses');
+        const response = await axios.get('https://learned.onrender.com/courses/featured-courses');
         setFeaturedCourses(response.data);
       } catch (error) {
         setError(error.message || 'An error occurred while fetching featured courses.');

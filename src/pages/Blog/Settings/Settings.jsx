@@ -12,7 +12,7 @@ export default function Settings() {
   const [success, setSuccess] = useState(false);
 
   const { user, dispatch } = useContext(Context);
-  const PF = "http://localhost:8000/images/"
+  const PF = "https://learned.onrender.com/images/"
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -30,11 +30,11 @@ export default function Settings() {
       data.append("file", file);
       updatedUser.profilePic = filename;
       try {
-        await axios.post("http://localhost:8000/upload", data);
+        await axios.post("https://learned.onrender.com/upload", data);
       } catch (err) {}
     }
     try {
-      const res = await axios.put("http://localhost:8000/blog/profile/" + user._id, updatedUser);
+      const res = await axios.put("https://learned.onrender.com/blog/profile/" + user._id, updatedUser);
       setSuccess(true);
       dispatch({ type: "UPDATE_SUCCESS", payload: res.data });
     } catch (err) {

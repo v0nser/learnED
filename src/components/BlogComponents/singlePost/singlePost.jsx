@@ -19,7 +19,7 @@ export default function SinglePost() {
     console.log(id);
     const getPost = async () => {
       try {
-        const res = await axios.get(`http://localhost:8000/blog/posts/${id}`);
+        const res = await axios.get(`https://learned.onrender.com/blog/posts/${id}`);
         console.log("Post data:", res.data);  
         setPost(res.data);
         setTitle(res.data.title);
@@ -36,7 +36,7 @@ export default function SinglePost() {
 
   const handleDelete = async () => {
     try {
-      await axios.delete(`http://localhost:8000/blog/posts/${post._id}`, {
+      await axios.delete(`https://learned.onrender.com/blog/posts/${post._id}`, {
         data: { username: user.username },
       });
       window.location.replace("/");
@@ -45,7 +45,7 @@ export default function SinglePost() {
 
   const handleUpdate = async () => {
     try {
-      await axios.put(`http://localhost:8000/blog/posts/${post._id}`, {
+      await axios.put(`https://learned.onrender.com/blog/posts/${post._id}`, {
         username: user.username,
         title,
         desc,
