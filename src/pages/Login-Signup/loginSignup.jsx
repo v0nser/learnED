@@ -49,7 +49,7 @@ const LoginSignup = () => {
         email,
         password,
       });
-      res.data && window.location.replace("/loginSignup");
+      res.data && window.location.replace("/");
     } catch (err) {
       setError(true);
     }

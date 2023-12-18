@@ -1,10 +1,11 @@
+// Home.jsx
 import { useEffect, useState } from "react";
 import Header from "../../../components/BlogComponents/Header/Header";
 import Posts from "../../../components/BlogComponents/Create/Posts";
 import Sidebar from "../../../components/BlogComponents/Sidebar/Sidebar";
 import "./home.css";
 import axios from "axios";
-import { useLocation } from "react-router";
+import { useLocation } from "react-router-dom";
 import TopBar from "../../../components/BlogComponents/Topbar/Topbar";
 
 export default function Home() {
@@ -18,9 +19,10 @@ export default function Home() {
     };
     fetchPosts();
   }, [search]);
+
   return (
     <>
-    <TopBar/>
+      <TopBar />
       <Header />
       <div className="home">
         <Posts posts={posts} />

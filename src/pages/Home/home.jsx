@@ -9,6 +9,9 @@ import sec4img from '../../assets/sec4img.png'
 import Airform from 'react-airform'
 import Footer from '../../components/Footer/Footer'
 import FeaturedCourses from '../../components/FeaturedCourses/FeaturedCourses'
+import FeaturedBlogs from '../../components/BlogComponents/FeaturedBlog/FeaturedBlog'
+import LiveClassSection from '../../components/LiveClassSection/liveclassSec'
+import Faqs from '../../components/FAQs/faqs'
 
 const home = () => {
     return (
@@ -38,7 +41,7 @@ const home = () => {
                 </div>
             </section>
             <FeaturedCourses/>
-            <section className="sec3">
+            <section id="about" className="sec3">
                 <div className="cards">
                     <h2>Why LearnED.?</h2>
                     <div className="card">
@@ -67,6 +70,9 @@ const home = () => {
                     </div>
                 </div>
             </section>
+            <section className="livclssec">
+                <LiveClassSection/>
+            </section>
             <section className="sec4">
                 <h2>Ready to kickstart your journey through Learn<span>ED.</span>?</h2>
                 <div className="buttons">
@@ -74,8 +80,10 @@ const home = () => {
                 </div>
                 <img src={sec4img} />
             </section>
-
-            <section className="contact">
+            <section className="featured-blog">
+                <FeaturedBlogs/>
+            </section>
+            <section id="contact" className="contact">
                 <h2>Got Questions?</h2>
                 <br />
 
@@ -96,6 +104,10 @@ const home = () => {
                     </Airform>
                 </div>
             </section>
+            <section className="faqs">
+                <Faqs/>
+            </section>
+
             <Footer/>
         </div>
     )

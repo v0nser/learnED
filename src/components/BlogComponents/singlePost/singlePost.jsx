@@ -1,36 +1,38 @@
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
-import { useParams } from 'react-router-dom'
-import { Link } from "react-router-dom";
+// import { useLocation } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { Context } from "../../../context/Context";
 import "./singlePost.css";
 
 export default function SinglePost() {
-  const { id } = useParams();
   const [post, setPost] = useState({});
-  const PF = "http://localhost:8000/images/";
+  // const PF = "http://localhost:8000/images/";
+  const { id } = useParams();
   const { user } = useContext(Context);
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
   const [updateMode, setUpdateMode] = useState(false);
 
   useEffect(() => {
-    console.log("ID", id);
-    if (id) {
-      const getPost = async () => {
-        try {
-          const res = await axios.get(`http://localhost:8000/blog/posts/${id}`);
-          console.log("Post fetched successfully:", res.data);
-          setPost(res.data);
-          setTitle(res.data.title || ""); 
-          setDesc(res.data.desc || ""); 
-        } catch (error) {
-          console.error("Error fetching post:", error);
-        }
-      };
-      getPost();
-    }
+    if(id) {
+    console.log(id);
+    const getPost = async () => {
+      try {
+        const res = await axios.get(`http://localhost:8000/blog/posts/${id}`);
+        console.log("Post data:", res.data);  
+        setPost(res.data);
+        setTitle(res.data.title);
+        setDesc(res.data.desc);
+      } catch (error) {
+        console.error("Error fetching post:", error);
+      }
+    };
+  
+    getPost();
+  }
   }, [id]);
+  
 
   const handleDelete = async () => {
     try {
@@ -48,11 +50,8 @@ export default function SinglePost() {
         title,
         desc,
       });
-      setUpdateMode(false);
-      console.log("Post updated successfully!");
-    } catch (error) {
-      console.error("Error updating post:", error);
-    }
+      setUpdateMode(false)
+    } catch (err) {}
   };
 
   return (
@@ -71,20 +70,20 @@ export default function SinglePost() {
           />
         ) : (
           <h1 className="singlePostTitle">
-  {post.title}
-  {post.username === user?.username && (
-    <div className="singlePostEdit">
-      <i
-        className="singlePostIcon far fa-edit"
-        onClick={() => setUpdateMode(true)}
-      ></i>
-      <i
-        className="singlePostIcon far fa-trash-alt"
-        onClick={handleDelete}
-      ></i>
-    </div>
-  )}
-</h1>
+            {title}
+            {post.username === user?.username && (
+              <div className="singlePostEdit">
+                <i
+                  className="singlePostIcon far fa-edit"
+                  onClick={() => setUpdateMode(true)}
+                ></i>
+                <i
+                  className="singlePostIcon far fa-trash-alt"
+                  onClick={handleDelete}
+                ></i>
+              </div>
+            )}
+          </h1>
         )}
         <div className="singlePostInfo">
           <span className="singlePostAuthor">
@@ -104,7 +103,7 @@ export default function SinglePost() {
             onChange={(e) => setDesc(e.target.value)}
           />
         ) : (
-          <p className="singlePostDesc">{post.desc}</p>
+          <p className="singlePostDesc">{desc}</p>
         )}
         {updateMode && (
           <button className="singlePostButton" onClick={handleUpdate}>
