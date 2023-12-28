@@ -20,7 +20,7 @@ const CourseDetail = () => {
     if (id) {
       const fetchCourseDetails = async () => {
         try {
-          const response = await axios.get(`http://localhost:8000/courses/${id}`);
+          const response = await axios.get(`https://learned.onrender.com/courses/${id}`);
           setCourseDetails(response.data);
         } catch (error) {
           console.error('Error fetching course details:', error);
@@ -46,7 +46,7 @@ const CourseDetail = () => {
       if (courseDetails) {
         // Call your server to initiate the checkout
         try {
-          const response = await axios.post('http://localhost:8000/checkout', {
+          const response = await axios.post('https://learned.onrender.com/checkout', {
             items: [
               {
                 id: courseDetails._id, 
@@ -80,7 +80,7 @@ const CourseDetail = () => {
 
   const checkout = async () => {
     try{
-      const res = await fetch("http://localhost:8000/checkout",{
+      const res = await fetch("https://learned.onrender.com/checkout",{
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -10,6 +10,8 @@ import BlogHome from './pages/Blog/Home/Home'
 import Settings from './pages/Blog/Settings/Settings';
 import Write from './pages/Blog/Write/Write';
 import Single from './pages/Blog/Single/Single';
+import LearningRoom from './pages/LearningRoom/learningroom';
+import LiveClass from './components/LiveRoom/JitsiMeeting'
 
 function App() {
   
@@ -25,8 +27,10 @@ function App() {
           <Route path="/blog/home" element={user ? <BlogHome /> : <Home/>} />
           <Route path="/blog/write" element={user ? <Write/> : <LoginSignupForm/> } />
           <Route path="/blog/settings" element={user ? <Settings/> : <LoginSignupForm/> } />
-          <Route path="/blog/post/:postId" element={user ? <Single/> : <BlogHome/>}></Route>
+          <Route path="/blog/posts/:id" element={user ? <Single/> : <BlogHome/>}></Route>
           <Route path="/courses/:id" element={<CourseDetail/>} />
+          <Route path="/courses/:id/learningRoom" element={<LearningRoom/>} />  
+          <Route path="/liveclass" element={user ? <LiveClass/> : <Home/>}/> 
         </Routes>
       </Router>
     </div>

@@ -26,6 +26,9 @@ const AllCourseSchema = new mongoose.Schema(
     ImageURL: {
         type: String,
     },
+    VideoURL:{
+      type : String,
+    },
     category: {
         type: String,
         required: true,

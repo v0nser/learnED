@@ -2,7 +2,7 @@ import "./CreatePost.css";
 import { Link } from "react-router-dom";
 
 export default function Post({ post }) {
-  const PF = "http://localhost:8000/images/";
+  // const PF = "http://localhost:8000/images/";
   return (
     <div className="post">
       {post.photo && <img className="postImg" src={PF + post.photo} alt="" />}
@@ -12,7 +12,7 @@ export default function Post({ post }) {
             <span className="postCat">{c.name}</span>
           ))}
         </div>
-        <Link to={`http://localhost:5173/blog/post/${post._id}`} className="link">
+        <Link key={post._id} to={`/blog/posts/${post._id}`} className="link">
           <span className="postTitle">{post.title}</span>
         </Link>
         <hr />

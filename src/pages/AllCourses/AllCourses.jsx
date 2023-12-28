@@ -22,7 +22,7 @@ const AllCourses = () => {
     // Fetch courses from the server when the component mounts
     const fetchCourses = async () => {
       try {
-        const response = await axios.get('http://localhost:8000/courses/all-courses');
+        const response = await axios.get('https://learned.onrender.com/courses/all-courses');
         console.log('Axios Response:', response);
         setAllCourses(response.data);
         setFilteredCourses(response.data);

@@ -13,7 +13,8 @@ const Course = require('./models/AllCourses')
 const Stripe = require("stripe")
 const blogCategory = require('./routes/blogRoutes/categories');
 const blogPost = require('./routes/blogRoutes/posts')
-const blogUsers = require('./routes/blogRoutes/users')
+const blogUsers = require('./routes/blogRoutes/users');
+const CourseVideo = require('./routes/coursevideos');
 const app = express();
 const stripe = Stripe('sk_test_51ODHD6SJRxvTTpNScRrG5yZYIcrMaGQ0VaZwcTBK0ABWLXpP6IRVO3g9H2Y1BcIcYU9BiGnWHF75q7s1Qv3Grr5R00zYUXRIRn')
 
@@ -41,7 +42,7 @@ mongoose.connect(process.env.MONGO_URL, options)
 
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: "https://learn-ed.vercel.app",
     methods: "GET,POST,PUT,DELETE",
     credentials: true,
   })
@@ -69,7 +70,7 @@ app.use("/courses", allcoursesRoutes);
 app.use("/blog/posts", blogPost);
 app.use("/blog/categories", blogCategory);
 // app.use("/blog/profile", blogUsers)
-
+app.use("/course/video", CourseVideo)
 
 app.post("/checkout", async (req, res) => {
   try {
@@ -98,8 +99,8 @@ app.post("/checkout", async (req, res) => {
           quantity: req.body.items[0].quantity,
         },
       ],
-      success_url: "http://localhost:5173/success",
-      cancel_url: "http://localhost:5173/cancel",
+      success_url: "https://learn-ed.vercel/success",
+      cancel_url: "https://learn-ed.vercel/cancel",
     });
 
     res.json({ url: session.url });
@@ -108,6 +109,7 @@ app.post("/checkout", async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
+
 
 app.listen("8000", () => {
   console.log("Server is running!");

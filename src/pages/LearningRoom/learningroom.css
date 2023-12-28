@@ -1,0 +1,18 @@
+  
+  .learning-room {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .video-container {
+    max-width: 1024px;
+    width: 100%;
+  }
+
+  .video-player{
+    width: 100%;
+    height:100vh;
+  }
+  

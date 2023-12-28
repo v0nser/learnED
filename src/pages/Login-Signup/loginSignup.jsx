@@ -15,7 +15,7 @@ const LoginSignup = () => {
 
   const googleLogin = () => {
     // Replace the URL with the actual Google authentication URL
-    window.open("http://localhost:8000/auth/google", "_self");
+    window.open("https://learned.onrender.com/auth/google", "_self");
   };
 
   const { dispatch, isFetching } = useContext(Context);
@@ -24,7 +24,7 @@ const LoginSignup = () => {
     e.preventDefault();
     dispatch({ type: "LOGIN_START" });
     try {
-      const res = await axios.post("http://localhost:8000/auth/login", {
+      const res = await axios.post("https://learned.onrender.com/auth/login", {
         username: userRef.current.value,
         password: passwordRef.current.value,
       });
@@ -44,12 +44,12 @@ const LoginSignup = () => {
     e.preventDefault();
     setError(false);
     try {
-      const res = await axios.post("http://localhost:8000/auth/register", {
+      const res = await axios.post("https://learned.onrender.com/auth/register", {
         username,
         email,
         password,
       });
-      res.data && window.location.replace("/loginSignup");
+      res.data && window.location.replace("/");
     } catch (err) {
       setError(true);
     }

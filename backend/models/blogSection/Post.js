@@ -23,6 +23,11 @@ const PostSchema = new mongoose.Schema(
       type: Array,
       required: false,
     },
+    featured: {
+      type: Boolean,
+      default: false,
+      required: true,
+    },
   },
   { timestamps: true }
 );

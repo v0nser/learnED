@@ -2,7 +2,7 @@ const router = require("express").Router();
 const User = require("../models/User");
 const passport = require("passport");
 const bcrypt = require("bcrypt");
-const CLIENT_URL = "http://localhost:5173/";
+const CLIENT_URL = "https://learn-ed.vercel/";
 
 //REGISTER
 router.post("/register", async (req, res) => {
