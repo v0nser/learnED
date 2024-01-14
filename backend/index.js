@@ -42,8 +42,8 @@ mongoose.connect(process.env.MONGO_URL, options)
 
 app.use(
   cors({
-    // origin: "https://learn-ed.vercel.app",
-    origin: "http://localhost:5173",
+    origin: "https://learn-ed.vercel.app",
+    // origin: "http://localhost:5173",
     methods: "GET,POST,PUT,DELETE",
     credentials: true,
   })
