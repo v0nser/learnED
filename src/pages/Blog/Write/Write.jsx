@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import "./Write.css";
 import axios from "axios";
 import { Context } from "../../../context/Context";
+import {BASE_URL} from "../../../utils/config"
 
 export default function Write() {
   const [title, setTitle] = useState("");
@@ -27,7 +28,7 @@ export default function Write() {
       } catch (err) {}
     }
     try {
-      const res = await axios.post("https://learned.onrender.com/blog/posts", newPost);
+      const res = await axios.post(`${BASE_URL}/blog/posts`, newPost);
       window.location.replace("/blog/post/" + res.data._id);
     } catch (err) {}
   };

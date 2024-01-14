@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom"; 
 import './FeaturedBlog.css';
+import {BASE_URL} from '../../../utils/config'
 
 const FeaturedBlogs = () => {
   const [featuredBlogs, setFeaturedBlogs] = useState([]);
@@ -10,7 +11,7 @@ const FeaturedBlogs = () => {
     const fetchFeaturedBlogs = async () => {
       try {
         // Fetch all blog posts from your API
-        const response = await axios.get("https://learned.onrender.com/blog/posts");
+        const response = await axios.get(`${BASE_URL}/blog/posts`);
 
         // Filter the posts to get only the featured ones
         const featuredPosts = response.data.filter((post) => post.featured);

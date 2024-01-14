@@ -2,13 +2,14 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./Sidebar.css";
+import {BASE_URL} from '../../../utils/config'
 
 export default function Sidebar() {
   const [cats, setCats] = useState([]);
 
   useEffect(() => {
     const getCats = async () => {
-      const res = await axios.get("https://learned.onrender.com/blog/categories");
+      const res = await axios.get(`${BASE_URL}/blog/categories`);
       setCats(res.data);
     };
     getCats();

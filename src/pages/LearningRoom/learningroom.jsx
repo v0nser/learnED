@@ -4,6 +4,7 @@ import axios from 'axios';
 import 'plyr/dist/plyr.css';
 import 'plyr/dist/plyr.polyfilled';
 import { useParams } from 'react-router-dom';
+import { BASE_URL } from '../../utils/config'
 import './learningroom.css';
 
 function extractYouTubeVideoId(url) {
@@ -22,7 +23,7 @@ const LearningRoom = () => {
     if (id) {
       const fetchVideoUrl = async () => {
         try {
-          const response = await axios.get(`https://learned.onrender.com/courses/${id}`);
+          const response = await axios.get(`${BASE_URL}/courses/${id}`);
           console.log('Video URL:', response.data.VideoURL);
           setVideoUrl(response.data.VideoURL);
           

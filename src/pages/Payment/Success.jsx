@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Confetti from 'react-confetti';
-import { useNavigate, useParams } from 'react-router-dom';  // Updated import
+import { useNavigate, useParams } from 'react-router-dom';  
+import { BASE_URL } from '../../utils/config'
 
 // Import axios for API requests
 import axios from 'axios';
@@ -22,7 +23,7 @@ const ConfettiSuccess = ({ location }) => {
     if (id) {
       const fetchCourseDetails = async () => {
         try {
-          const response = await axios.get(`https://learned.onrender.com/courses/${id}`);
+          const response = await axios.get(`${BASE_URL}/courses/${id}`);
           setCourseDetails(response.data);
         } catch (error) {
           console.error('Error fetching course details:', error);

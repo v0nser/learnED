@@ -2,6 +2,7 @@ import React, { useState, useContext, useRef } from 'react';
 import { FaTwitter, FaGoogle, FaLinkedin, FaFacebook, FaLock, FaUser, FaEnvelope } from "react-icons/fa";
 import axios from 'axios';
 import { Context } from "../../context/Context";
+import { BASE_URL } from '../../utils/config'
 import { Link } from "react-router-dom";
 import './loginSignup.css';
 
@@ -15,7 +16,7 @@ const LoginSignup = () => {
 
   const googleLogin = () => {
     // Replace the URL with the actual Google authentication URL
-    window.open("https://learned.onrender.com/auth/google", "_self");
+    window.open(`${BASE_URL}/auth/google`, "_self");
   };
 
   const { dispatch, isFetching } = useContext(Context);
@@ -24,7 +25,7 @@ const LoginSignup = () => {
     e.preventDefault();
     dispatch({ type: "LOGIN_START" });
     try {
-      const res = await axios.post("https://learned.onrender.com/auth/login", {
+      const res = await axios.post(`${BASE_URL}/auth/login`, {
         username: userRef.current.value,
         password: passwordRef.current.value,
       });
@@ -44,7 +45,7 @@ const LoginSignup = () => {
     e.preventDefault();
     setError(false);
     try {
-      const res = await axios.post("https://learned.onrender.com/auth/register", {
+      const res = await axios.post(`${BASE_URL}/auth/register`, {
         username,
         email,
         password,
