@@ -1,6 +1,5 @@
-/* Add your styles here */
 footer {
-    background-color: #ff6600;
+    background-color: #011627;
     padding: 10px 0;
 }
 
@@ -14,6 +13,10 @@ footer {
     flex: 1;
     padding: 10px;
     text-align: center;
+}
+
+.footer-column h3{
+    color: #fff;
 }
 
 h3 {
@@ -40,10 +43,11 @@ a {
 footer h4{
     padding: 20px;
     text-align: center;
+    color: #fff;
 }
 
-a:hover {
-    color: #333;
+footer a:hover {
+    color: #F71735;
 }
 
 @media (max-width: 768px) {

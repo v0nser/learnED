@@ -2,7 +2,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #333333;
+    background-color: #011627;
 }
 
 .hero .header1{
@@ -14,7 +14,7 @@
 }
 
 .hero .header1 span{
-    color: #ffc801;
+    color: #FF9F1C;
 }
 
 .hero .header2{
@@ -27,7 +27,7 @@
 }
 
 .sec2{
-    background-color: #ff6600;
+    background-color: #F71735;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -58,7 +58,7 @@
 .sec3{
     display: flex;
     align-items: center;
-    background-color: #ffc801;
+    background-color: #FF9F1C;
     padding: 50px;
 }
 
@@ -74,7 +74,7 @@
 } */
 
 .sec3 .cards .card .content{
-    color: #333333;
+    color: #FDFFFC;
     padding: 40px;
 }
 
@@ -87,7 +87,7 @@
     display: flex;
     flex-direction: column;
     padding: 50px;
-    background-color: #ff6600;
+    background-color: #F71735;
 }
 
 .sec4 h2{
@@ -152,7 +152,7 @@
   
   input,
   textarea {
-    border: 1px solid #33333;
+    border: 1px solid #333333;
     border-radius: 5px;
     padding: 10px;
     font-size: 16px;
@@ -179,3 +179,6 @@
   }
   
 
+.faqs{
+    background-color: #FF9F1C;
+}

@@ -1,5 +1,5 @@
 .navbar {
-    background-color: #ff6600;
+    background-color: #011627;
     padding: 15px 0;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   }
@@ -19,8 +19,12 @@
     font-weight: bold;
   }
 
+  .logo:hover{
+    color:#FF9F1C;
+  }
+
   .logo span{
-    color: #ffc801;
+    color: #ff9f1c;
   }
   
   .nav-menu {
@@ -46,7 +50,7 @@
   }
   
   .nav-item a:hover {
-    color: #333;
+    color: #FF9F1C;
   }
   
   .auth-buttons {
@@ -57,7 +61,7 @@
   .login-button,
   .signup-button {
     background-color: white;
-    color: #ff6600;
+    color: #ff9f1c;
     border: none;
     padding: 10px 20px;
     margin-left: 20px;

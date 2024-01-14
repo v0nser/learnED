@@ -21,7 +21,7 @@
   padding: 20px;
   border: 1px solid #ddd;
   border-radius: 16px; 
-  background-color: #333333;
+  background-color: #011627;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease-in-out;
   cursor: pointer; 
@@ -34,7 +34,7 @@
 
 .course-title {
   font-size: 1.4em;
-  color: #007bff;
+  color: #41EAD4;
   margin-bottom: 12px;
 }
 
@@ -51,9 +51,13 @@
 }
 
 .allcoursesbtn{
-  background-color: #007bff;
+  background-color: #011627;
   padding: 20px;
   border-radius: 30px;
+}
+
+.allcoursesbtn:hover{
+  color: #41EAD4;
 }
 
 @media (max-width: 600px) {
