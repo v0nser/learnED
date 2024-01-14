@@ -10,7 +10,25 @@ const Navbar = () => {
     dispatch({ type: "LOGOUT" });
   };
 
-
+  useEffect(() => {
+    const usertoken = localStorage.getItem('token');
+    console.log('usertoken:', usertoken);
+  
+    try {
+      // Parse the JSON string
+      const userObject = JSON.parse(usertoken);
+  
+      // Parse the nested JSON string
+      const userPayload = JSON.parse(userObject.user);
+  
+      // Extract the username
+      const username = userPayload?.username || null;
+  
+      console.log('username:', username);
+    } catch (error) {
+      console.error('Error parsing usertoken:', error);
+    }
+  }, []);
   
 
   return (
