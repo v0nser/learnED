@@ -34,7 +34,7 @@ const FeaturedBlogs = () => {
             <Link to={`/blog/posts/${blog._id}`}>
               <h3>{blog.title}</h3>
             </Link>
-            <img src={blog.photo} alt={`Thumbnail for ${blog.title}`} />
+            <img src={blog.photo} alt={`Thumbnail for ${blog.title}`} height="200" width="300"/>
             <p>Author: {blog.username}</p>
           </div>
         ))}
