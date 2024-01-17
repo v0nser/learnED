@@ -8,7 +8,7 @@ import {BASE_URL} from "../../../utils/config"
 
 export default function SinglePost() {
   const [post, setPost] = useState({});
-  const PF = `${BASE_URL}/images/';
+  // const PF = `${BASE_URL}/images/';
   const { id } = useParams();
   const { user } = useContext(Context);
   const [title, setTitle] = useState("");
@@ -59,7 +59,7 @@ export default function SinglePost() {
     <div className="singlePost">
       <div className="singlePostWrapper">
         {post.photo && (
-          <img src={PF + post.photo} alt="" className="singlePostImg" />
+          <img src={post.photo} alt="" className="singlePostImg" />
         )}
         {updateMode ? (
           <input
