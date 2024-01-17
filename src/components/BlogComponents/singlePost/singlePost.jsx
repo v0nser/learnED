@@ -8,7 +8,7 @@ import {BASE_URL} from "../../../utils/config"
 
 export default function SinglePost() {
   const [post, setPost] = useState({});
-  // const PF = "http://localhost:8000/images/";
+  const PF = `${BASE_URL}/images/';
   const { id } = useParams();
   const { user } = useContext(Context);
   const [title, setTitle] = useState("");
