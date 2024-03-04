@@ -44,8 +44,8 @@ mongoose.connect(process.env.MONGO_URL, options)
 
 app.use(
   cors({
-    origin: "https://learn-ed.vercel.app",
-    // origin: "http://localhost:5173",
+    // origin: "https://learn-ed.vercel.app",
+    origin: "http://localhost:5173",
     methods: "GET,POST,PUT,DELETE",
     credentials: true,
   })
@@ -106,8 +106,8 @@ app.post("/checkout", async (req, res) => {
           quantity: req.body.items[0].quantity,
         },
       ],
-      success_url: "https://learn-ed.vercel/success",
-      cancel_url: "https://learn-ed.vercel/cancel",
+      success_url: "https://learn-ed.vercel.app/success",
+      cancel_url: "https://learn-ed.vercel.app/cancel",
     });
 
     res.json({ url: session.url });
