@@ -2,6 +2,7 @@ import React, { useState, useContext, useRef } from 'react';
 import './LoginPopup.css'; 
 import axios from 'axios';
 import { Context } from "../../context/Context";
+import {BASE_URL} from "../../utils/config"
 
 const LoginPopup = ({ onLogin }) => {
   const [username, setUsername] = useState('');
@@ -16,7 +17,7 @@ const LoginPopup = ({ onLogin }) => {
     dispatch({ type: "LOGIN_START" });
     try {
       // alert("Login success")
-      const res = await axios.post("http://localhost:8000/auth/login", {
+      const res = await axios.post(`${BASE_URL}/auth/login`, {
         username: userRef.current.value,
         password: passwordRef.current.value,
       });

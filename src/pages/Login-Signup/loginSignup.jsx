@@ -2,8 +2,10 @@ import React, { useState, useContext, useRef } from 'react';
 import { FaTwitter, FaGoogle, FaLinkedin, FaFacebook, FaLock, FaUser, FaEnvelope } from "react-icons/fa";
 import axios from 'axios';
 import { Context } from "../../context/Context";
+import { BASE_URL } from '../../utils/config'
 import { Link } from "react-router-dom";
 import './loginSignup.css';
+import loginSignupImg from '../../assets/login-signup.png'
 
 const LoginSignup = () => {
   const [isSignUp, setIsSignUp] = useState(false);
@@ -15,7 +17,7 @@ const LoginSignup = () => {
 
   const googleLogin = () => {
     // Replace the URL with the actual Google authentication URL
-    window.open("http://localhost:8000/auth/google", "_self");
+    window.open(`${BASE_URL}/auth/google`, "_self");
   };
 
   const { dispatch, isFetching } = useContext(Context);
@@ -24,7 +26,7 @@ const LoginSignup = () => {
     e.preventDefault();
     dispatch({ type: "LOGIN_START" });
     try {
-      const res = await axios.post("http://localhost:8000/auth/login", {
+      const res = await axios.post(`${BASE_URL}/auth/login`, {
         username: userRef.current.value,
         password: passwordRef.current.value,
       });
@@ -44,12 +46,12 @@ const LoginSignup = () => {
     e.preventDefault();
     setError(false);
     try {
-      const res = await axios.post("http://localhost:8000/auth/register", {
+      const res = await axios.post(`${BASE_URL}/auth/register`, {
         username,
         email,
         password,
       });
-      res.data && window.location.replace("/loginSignup");
+      res.data && window.location.replace("/");
     } catch (err) {
       setError(true);
     }
@@ -126,7 +128,7 @@ const LoginSignup = () => {
             <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Debitis, ex ratione. Aliquid!</p>
             <button className="btn transparent" onClick={toggleMode}>Sign up</button>
           </div>
-          <img src="https://i.ibb.co/6HXL6q1/Privacy-policy-rafiki.png" className="image" alt="" />
+          <img src={loginSignupImg} className="image" alt="" />
         </div>
         <div className="panel right-panel">
           <div className="content">
@@ -134,7 +136,7 @@ const LoginSignup = () => {
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum laboriosam ad deleniti.</p>
             <button className="btn transparent" onClick={toggleMode}>Sign in</button>
           </div>
-          <img src="https://i.ibb.co/nP8H853/Mobile-login-rafiki.png" className="image" alt="" />
+          <img src={loginSignupImg} className="image" alt="" />
         </div>
       </div>
     </div>

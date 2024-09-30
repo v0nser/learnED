@@ -2,6 +2,7 @@ import "./settings.css";
 import Sidebar from "../../../components/BlogComponents/Sidebar/Sidebar";
 import { useContext, useState } from "react";
 import { Context } from "../../../context/Context";
+import { BASE_URL } from '../../../utils/config'
 import axios from "axios";
 
 export default function Settings() {
@@ -12,7 +13,7 @@ export default function Settings() {
   const [success, setSuccess] = useState(false);
 
   const { user, dispatch } = useContext(Context);
-  const PF = "http://localhost:8000/images/"
+  const PF = `${BASE_URL}/images/`
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -30,11 +31,11 @@ export default function Settings() {
       data.append("file", file);
       updatedUser.profilePic = filename;
       try {
-        await axios.post("http://localhost:8000/upload", data);
+        await axios.post(`${BASE_URL}/upload`, data);
       } catch (err) {}
     }
     try {
-      const res = await axios.put("http://localhost:8000/blog/profile/" + user._id, updatedUser);
+      const res = await axios.put(`${BASE_URL}/blog/profile/` + user._id, updatedUser);
       setSuccess(true);
       dispatch({ type: "UPDATE_SUCCESS", payload: res.data });
     } catch (err) {

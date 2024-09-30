@@ -7,6 +7,7 @@ import Footer from '../../components/Footer/Footer';
 import { Context } from '../../context/Context';
 import './AllCourses.css';
 import axios from 'axios';
+import {BASE_URL} from '../../utils/config'
 
 const AllCourses = () => {
   const { user } = useContext(Context);
@@ -22,7 +23,7 @@ const AllCourses = () => {
     // Fetch courses from the server when the component mounts
     const fetchCourses = async () => {
       try {
-        const response = await axios.get('http://localhost:8000/courses/all-courses');
+        const response = await axios.get(`${BASE_URL}/courses/all-courses`);
         console.log('Axios Response:', response);
         setAllCourses(response.data);
         setFilteredCourses(response.data);

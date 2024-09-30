@@ -6,6 +6,7 @@ import Footer from '../../components/Footer/Footer';
 import LoginPopup from '../../components/LoginPopup/LoginPopup';
 import EnrollmentPopup from '../EnrollmentPopup/EnrollmentPopup';
 import { Context } from '../../context/Context';
+import {BASE_URL} from "../../utils/config"
 import './CourseDetail.css';
 
 const CourseDetail = () => {
@@ -20,7 +21,7 @@ const CourseDetail = () => {
     if (id) {
       const fetchCourseDetails = async () => {
         try {
-          const response = await axios.get(`http://localhost:8000/courses/${id}`);
+          const response = await axios.get(`${BASE_URL}/courses/${id}`);
           setCourseDetails(response.data);
         } catch (error) {
           console.error('Error fetching course details:', error);
@@ -46,7 +47,7 @@ const CourseDetail = () => {
       if (courseDetails) {
         // Call your server to initiate the checkout
         try {
-          const response = await axios.post('http://localhost:8000/checkout', {
+          const response = await axios.post(`${BASE_URL}/checkout`, {
             items: [
               {
                 id: courseDetails._id, 
@@ -80,7 +81,7 @@ const CourseDetail = () => {
 
   const checkout = async () => {
     try{
-      const res = await fetch("http://localhost:8000/checkout",{
+      const res = await fetch(`${BASE_URL}/checkout`,{
         method: "POST",
         headers: {
           "Content-Type": "application/json",

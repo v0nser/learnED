@@ -1,0 +1,29 @@
+.faq-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .faq-item {
+    margin-bottom: 20px;
+    margin-top: 2%;
+    cursor: pointer;
+  }
+  
+  .faq-item h3 {
+    text-align: center;
+    color: #fff;
+  }
+  
+  .faq-item h3 {
+    color: #fff;
+  }
+  
+.faq-item h3.active {
+    color: #333;
+  }
+  
+  .faq-item p {
+    color: #666;
+  }
+  

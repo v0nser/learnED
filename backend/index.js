@@ -6,6 +6,7 @@ const mongoose = require("mongoose");
 const passport = require("passport");
 const multer = require('multer');
 const path = require('path')
+const cookieParser = require('cookie-parser')
 const authRoute = require("./routes/auth");
 const courseRoutes = require('./routes/courses')
 const allcoursesRoutes = require('./routes/allCourses')
@@ -13,8 +14,10 @@ const Course = require('./models/AllCourses')
 const Stripe = require("stripe")
 const blogCategory = require('./routes/blogRoutes/categories');
 const blogPost = require('./routes/blogRoutes/posts')
-const blogUsers = require('./routes/blogRoutes/users')
+const blogUsers = require('./routes/blogRoutes/users');
+const CourseVideo = require('./routes/coursevideos');
 const app = express();
+
 const stripe = Stripe('sk_test_51ODHD6SJRxvTTpNScRrG5yZYIcrMaGQ0VaZwcTBK0ABWLXpP6IRVO3g9H2Y1BcIcYU9BiGnWHF75q7s1Qv3Grr5R00zYUXRIRn')
 
 dotenv.config();
@@ -41,7 +44,8 @@ mongoose.connect(process.env.MONGO_URL, options)
 
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: "https://learn-ed.vercel.app",
+    // origin: "http://localhost:5173",
     methods: "GET,POST,PUT,DELETE",
     credentials: true,
   })
@@ -63,13 +67,17 @@ app.post("/upload", upload.single("file"), (req, res) => {
 });
 
 
+//jwt
+
+
+app.use(cookieParser());
 app.use("/auth", authRoute);
 app.use("/courses", courseRoutes);
 app.use("/courses", allcoursesRoutes);
 app.use("/blog/posts", blogPost);
 app.use("/blog/categories", blogCategory);
 // app.use("/blog/profile", blogUsers)
-
+app.use("/course/video", CourseVideo)
 
 app.post("/checkout", async (req, res) => {
   try {
@@ -98,8 +106,8 @@ app.post("/checkout", async (req, res) => {
           quantity: req.body.items[0].quantity,
         },
       ],
-      success_url: "http://localhost:5173/success",
-      cancel_url: "http://localhost:5173/cancel",
+      success_url: "https://learn-ed.vercel.app/success",
+      cancel_url: "https://learn-ed.vercel.app/cancel",
     });
 
     res.json({ url: session.url });
@@ -108,6 +116,7 @@ app.post("/checkout", async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
+
 
 app.listen("8000", () => {
   console.log("Server is running!");

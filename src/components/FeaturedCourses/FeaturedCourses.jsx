@@ -4,6 +4,7 @@ import axios from 'axios';
 import fc_img from '../../assets/6107606.webp';
 import './FeaturedCourses.css';
 import { Context } from '../../context/Context';
+import {BASE_URL} from '../../utils/config'
 
 const FeaturedCourses = () => {
   const { user } = useContext(Context);
@@ -14,7 +15,7 @@ const FeaturedCourses = () => {
   useEffect(() => {
     const fetchFeaturedCourses = async () => {
       try {
-        const response = await axios.get('http://localhost:8000/courses/featured-courses');
+        const response = await axios.get(`${BASE_URL}/courses/featured-courses`);
         setFeaturedCourses(response.data);
       } catch (error) {
         setError(error.message || 'An error occurred while fetching featured courses.');

@@ -10,7 +10,25 @@ const Navbar = () => {
     dispatch({ type: "LOGOUT" });
   };
 
-
+  useEffect(() => {
+    const usertoken = localStorage.getItem('token');
+    console.log('usertoken:', usertoken);
+  
+    try {
+      // Parse the JSON string
+      const userObject = JSON.parse(usertoken);
+  
+      // Parse the nested JSON string
+      const userPayload = JSON.parse(userObject.user);
+  
+      // Extract the username
+      const username = userPayload?.username || null;
+  
+      console.log('username:', username);
+    } catch (error) {
+      console.error('Error parsing usertoken:', error);
+    }
+  }, []);
   
 
   return (
@@ -24,13 +42,19 @@ const Navbar = () => {
             <a href="/">Home</a>
           </li>
           <li className="nav-item">
-            <a href="/about">About</a>
+            <a href="#about">About</a>
           </li>
-          <li className="nav-item">
+          {/* <li className="nav-item">
             <a href="/services">Services</a>
+          </li> */}
+          <li className="nav-item">
+            <a href="#contact">Contact</a>
           </li>
           <li className="nav-item">
-            <a href="/contact">Contact</a>
+            <a href="/allCourses">Courses</a>
+          </li>
+          <li className="nav-item">
+            <a href="/liveclass">Live Class</a>
           </li>
           <li className="nav-item">
             <a href="/blog/home">Blog</a>

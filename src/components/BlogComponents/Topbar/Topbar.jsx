@@ -2,10 +2,11 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../../../context/Context";
 import "./Topbar.css";
+import {BASE_URL} from "../../../utils/config"
 
 export default function TopBar() {
   const { user, dispatch } = useContext(Context);
-  const PF = "http://localhost:8000/images/"
+  const PF = `${BASE_URL}/images/`
 
   const handleLogout = () => {
     dispatch({ type: "LOGOUT" });
