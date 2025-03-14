@@ -1,82 +1,141 @@
 .navbar {
-    background-color: #011627;
-    padding: 15px 0;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  }
-  
-  .navbar-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .logo {
-    font-size: 24px;
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
+  background-color: #011627;
+  padding: 15px 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  box-sizing: border-box;
+}
+
+.navbar-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 0 10px;
+  box-sizing: border-box;
+}
+
+.logo {
+  font-size: 24px;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s ease;
+  white-space: nowrap;
+}
+
+.logo:hover {
+  color: #FF9F1C;
+}
+
+.nav-menu {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  flex-grow: 1;
+  justify-content: flex-end;
+}
+
+.nav-item {
+  margin-left: 20px;
+}
+
+.nav-item a {
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+  transition: color 0.3s ease;
+}
+
+.nav-item a:hover {
+  color: #FF9F1C;
+}
+
+.auth-buttons {
+  display: flex;
+  align-items: center;
+  margin-left: 20px;
+  white-space: nowrap;
+}
+
+.auth-buttons.mobile {
+  display: none;
+}
+
+.auth-buttons p {
+  margin: 0 10px 0 0;
+  color: white;
+}
+
+.login-button {
+  background-color: #FF9F1C;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.login-button:hover {
+  background-color: #e08e17;
+}
+
+.hamburger {
+  display: none;
+  font-size: 24px;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .hamburger {
+    display: block;
   }
 
-  .logo:hover{
-    color:#FF9F1C;
-  }
-
-  .logo span{
-    color: #ff9f1c;
-  }
-  
   .nav-menu {
-    list-style: none;
-    display: flex;
-    margin: 0;
-    padding: 0;
-  }
-  
-  .nav-item {
-    margin-right: 20px;
-  }
-  
-  .nav-item:last-child {
-    margin-right: 0;
-  }
-  
-  .nav-item a {
-    text-decoration: none;
-    color: white;
-    font-weight: 600;
-    transition: color 0.3s;
-  }
-  
-  .nav-item a:hover {
-    color: #FF9F1C;
-  }
-  
-  .auth-buttons {
-    display: flex;
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    background-color: #011627;
+    padding: 20px 0;
     align-items: center;
   }
-  
-  .login-button,
-  .signup-button {
-    background-color: white;
-    color: #ff9f1c;
-    border: none;
-    padding: 10px 20px;
-    margin-left: 20px;
-    border-radius: 25px;
-    cursor: pointer;
-    font-weight: bold;
+
+  .nav-menu.active {
+    display: flex;
   }
-  
-  .login-button:hover,
-  .signup-button:hover {
-    background-color: #333;
-    color: white;
+
+  .nav-item {
+    margin: 10px 0;
+    text-align: center;
   }
-  
-  .auth-buttons p{
-    color: #fff;
-    font-weight: bolder ;
+
+  .auth-buttons {
+    display: none;
   }
+
+  .auth-buttons.mobile {
+    display: flex;
+    margin-left: 0;
+    margin-top: 20px;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .nav-menu.active .auth-buttons.mobile {
+    display: flex;
+  }
+}

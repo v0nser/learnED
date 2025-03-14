@@ -6,7 +6,6 @@ import card1 from '../../assets/card_img1.png'
 import card2 from '../../assets/card_img2.png'
 import card3 from '../../assets/card_img3.png'
 import sec4img from '../../assets/sec4img.png'
-// import Airform from 'react-airform'
 import Footer from '../../components/Footer/Footer'
 import FeaturedCourses from '../../components/FeaturedCourses/FeaturedCourses'
 import FeaturedBlogs from '../../components/BlogComponents/FeaturedBlog/FeaturedBlog'
@@ -15,7 +14,7 @@ import Faqs from '../../components/FAQs/faqs'
 
 const home = () => {
     return (
-        <div>
+        <div className='hero-container'>
             <Navbar />
             <section className='hero'>
                 <div class="hero-header">
@@ -83,27 +82,6 @@ const home = () => {
             <section className="featured-blog">
                 <FeaturedBlogs/>
             </section>
-            {/* <section id="contact" className="contact">
-                <h2>Got Questions?</h2>
-                <br />
-
-                <div className="contact-container">
-                    <h2 className="contact-title">Contact Us</h2>
-                    <Airform email="raghuvanshivaibhav01@gmail.com">
-                        <div className="form-group">
-                            <label htmlFor="name">Name:</label>
-                            <input type="text" id="name" name="name" />
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="message">Message:</label>
-                            <textarea id="message" name="message"></textarea>
-                        </div>
-                        <div className="form-group">
-                            <button>Send</button>
-                        </div>
-                    </Airform>
-                </div>
-            </section> */}
             <section className="faqs">
                 <Faqs/>
             </section>

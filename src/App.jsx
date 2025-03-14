@@ -29,7 +29,7 @@ function App() {
           <Route path="/blog/settings" element={user ? <Settings/> : <LoginSignupForm/> } />
           <Route path="/blog/posts/:id" element={user ? <Single/> : <BlogHome/>}></Route>
           <Route path="/courses/:id" element={<CourseDetail/>} />
-          <Route path="/courses/:id/learningRoom" element={<LearningRoom/>} />  
+          <Route path="/course/:id/learningRoom" element={<LearningRoom/>} />  
           <Route path="/liveclass" element={user ? <LiveClass/> : <Home/>}/> 
         </Routes>
       </Router>

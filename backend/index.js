@@ -6,19 +6,22 @@ const mongoose = require("mongoose");
 const passport = require("passport");
 const multer = require('multer');
 const path = require('path')
+const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
 const authRoute = require("./routes/auth");
 const courseRoutes = require('./routes/courses')
 const allcoursesRoutes = require('./routes/allCourses')
 const Course = require('./models/AllCourses')
-const Stripe = require("stripe")
+const Razorpay = require('razorpay');
 const blogCategory = require('./routes/blogRoutes/categories');
 const blogPost = require('./routes/blogRoutes/posts')
 const blogUsers = require('./routes/blogRoutes/users');
 const CourseVideo = require('./routes/coursevideos');
+const User = require('./models/User');
+const jwt = require('jsonwebtoken');
+const crypto = require("crypto");
 const app = express();
 
-const stripe = Stripe('sk_test_51ODHD6SJRxvTTpNScRrG5yZYIcrMaGQ0VaZwcTBK0ABWLXpP6IRVO3g9H2Y1BcIcYU9BiGnWHF75q7s1Qv3Grr5R00zYUXRIRn')
 
 dotenv.config();
 app.use(express.json());
@@ -44,8 +47,8 @@ mongoose.connect(process.env.MONGO_URL, options)
 
 app.use(
   cors({
-    origin: "https://learn-ed.vercel.app",
-    // origin: "http://localhost:5173",
+    // origin: "https://learn-ed.vercel.app",
+    origin: "http://localhost:5173",
     methods: "GET,POST,PUT,DELETE",
     credentials: true,
   })
@@ -67,9 +70,6 @@ app.post("/upload", upload.single("file"), (req, res) => {
 });
 
 
-//jwt
-
-
 app.use(cookieParser());
 app.use("/auth", authRoute);
 app.use("/courses", courseRoutes);
@@ -79,45 +79,102 @@ app.use("/blog/categories", blogCategory);
 // app.use("/blog/profile", blogUsers)
 app.use("/course/video", CourseVideo)
 
-app.post("/checkout", async (req, res) => {
-  try {
-    // Convert the id to a string
-    const courseId = req.body.items[0].id.toString();
+// Initialize Razorpay
+const razorpay = new Razorpay({
+  key_id: process.env.RAZORPAY_KEY_ID,
+  key_secret: process.env.RAZORPAY_KEY_SECRET
+});
 
-    // Fetch course details from the database
+// Razorpay checkout endpoint
+app.post("/razorpay/checkout", async (req, res) => {
+  try {
+    const courseId = req.body.items[0].id.toString();
     const course = await Course.findOne({ _id: courseId });
 
     if (!course) {
       return res.status(404).json({ error: "Course not found" });
     }
 
-    const session = await stripe.checkout.sessions.create({
-      payment_method_types: ["card"],
-      mode: "payment",
-      line_items: [
-        {
-          price_data: {
-            currency: "inr",
-            product_data: {
-              name: course.title,
-            },
-            unit_amount: course.Price * 100,
-          },
-          quantity: req.body.items[0].quantity,
-        },
-      ],
-      success_url: "https://learn-ed.vercel.app/success",
-      cancel_url: "https://learn-ed.vercel.app/cancel",
-    });
+    const options = {
+      amount: course.Price * 100, // Amount in paise
+      currency: "INR",
+      receipt: `rcpt_${courseId.slice(-6)}_${Date.now().toString().slice(-6)}`, 
+      payment_capture: 1, // Auto capture
+      notes: {
+        courseId: courseId,
+        courseTitle: course.title
+      }
+    };
 
-    res.json({ url: session.url });
+    const order = await razorpay.orders.create(options);
+
+    res.json({
+      id: order.id,
+      currency: order.currency,
+      amount: order.amount,
+      key: process.env.RAZORPAY_KEY_ID,
+      courseTitle: course.title,
+      success_url: "http://localhost:5173/success",
+      cancel_url: "http://localhost:5173/cancel"
+    });
   } catch (err) {
-    console.error('Error in checkout endpoint:', err);
+    console.error('Error in Razorpay checkout endpoint:', err);
     res.status(500).json({ error: err.message });
   }
 });
 
+// Razorpay payment verification endpoint
+app.post("/razorpay/verify", async (req, res) => {
+  try {
+    const {
+      razorpay_order_id,
+      razorpay_payment_id,
+      razorpay_signature
+    } = req.body;
 
+    // Extract user _id from JWT token in headers (if using token-based authentication)
+    const token = req.headers.authorization?.split(" ")[1]; // Bearer <token>
+    if (!token) return res.status(401).json({ error: "Unauthorized" });
+
+    const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
+    const userMongoId = decoded._id; // User _id
+
+    // Verify payment signature
+    const body = razorpay_order_id + "|" + razorpay_payment_id;
+    const expectedSignature = crypto
+      .createHmac("sha256", process.env.RAZORPAY_KEY_SECRET)
+      .update(body.toString())
+      .digest("hex");
+
+    if (expectedSignature === razorpay_signature) {
+      // Payment is verified
+      const order = await razorpay.orders.fetch(razorpay_order_id);
+      
+      // Handle successful payment
+      await handleRazorpaySuccess(order);
+      
+      res.json({ status: "success" });
+    } else {
+      res.status(400).json({ status: "failure", error: "Invalid signature" });
+    }
+  } catch (err) {
+    console.error('Error in Razorpay verification:', err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+const handleRazorpaySuccess = async (order, userMongoId) => {
+  try {
+    const courseId = order.notes.courseId;
+    
+    await User.findByIdAndUpdate(userMongoId, {
+      $addToSet: { enrolledCourses: courseId } // Prevents duplicate courses
+    });
+    
+    console.log(`User ${userMongoId} enrolled in course ${courseId}`);  } catch (err) {
+    console.error('Error handling Razorpay success:', err);
+  }
+};
 app.listen("8000", () => {
   console.log("Server is running!");
 });
